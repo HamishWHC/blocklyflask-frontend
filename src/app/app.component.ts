@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'blocklyflask-frontend';
+  routeType: string = "";
+
+  constructor(router: Router) {
+    if (router.url && router.url.split("/").length > 1 && router.url.split("/")[1] === "edit") {
+      this.routeType = "ide";
+    } else {
+      this.routeType = "base";
+    }
+  }
 }
