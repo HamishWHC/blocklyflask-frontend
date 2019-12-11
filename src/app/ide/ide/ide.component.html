@@ -1,1 +1,25 @@
-<p>ide works!</p>
+<mat-toolbar id="toolbar">
+  <div id="toolbarLeft">
+    <a href="#">@{{user.username}}</a> / <a href="#">{{ project.name }}</a>
+    <span id="name-button-sep"></span>
+    <button mat-stroked-button color="primary" disabled>Save</button>
+    <button mat-stroked-button>Fork</button>
+    <button mat-stroked-button color="accent">Sharing</button>
+  </div>
+</mat-toolbar>
+<div id="container">
+  <div class="pane-split">
+    <as-split id="splitter" unit="percent" [restrictMove]="restrictMove" gutterSize="10">
+      <as-split-area size="30" minSize="5" maxSize="50">
+        <div id="file-view" class="pane">
+          <app-file-view></app-file-view>
+        </div>
+      </as-split-area>
+      <as-split-area size="70" minSize="50" maxSize="95">
+        <div id="blockly-editor" class="pane">
+          <app-blockly-editor></app-blockly-editor>
+        </div>
+      </as-split-area>
+    </as-split>
+  </div>
+</div>
