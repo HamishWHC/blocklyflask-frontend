@@ -8,6 +8,7 @@ import {UserComponent} from './user-view/user/user.component';
 import {IDEComponent} from './ide/ide/ide.component';
 import {IDEModule} from './ide/ide.module';
 import {UserViewModule} from './user-view/user-view.module';
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,12 +24,12 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     IDEModule,
-    UserViewModule
+    UserViewModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap:
     [AppComponent]
 })
 
-export class AppModule {
-}
+export class AppModule {}

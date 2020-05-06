@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {MatTreeNestedDataSource} from '@angular/material';
+import {Component, Input, OnInit} from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
+import Directory from '../../models/directory';
+import Project from '../../models/project';
+import BlockFile from '../../models/block-file';
 
-interface FileNode {
-  name: string;
-  contents?: FileNode[];
-}
+type DirOrFile = Directory | BlockFile;
 
 @Component({
   selector: 'app-file-view',
@@ -14,30 +13,17 @@ interface FileNode {
 })
 export class FileViewComponent implements OnInit {
 
-  project: any = {
-    name: 'test-project',
-    files: [
-      {
-        name: 'app', contents: [
-          {name: 'init'},
-          {
-            name: 'blueprints', contents: [
-              {name: 'auth'}, {name: 'users'}, {name: 'clients'}
-            ]
-          },
-          {
-            name: 'models', contents: [
-              {name: 'user'}, {name: 'client'}
-            ]
-          }
-        ]
-      }
-    ]
-  };
+  @Input() project: Project;
 
-  treeControl = new NestedTreeControl<FileNode>(node => node.contents);
+  treeControl = new NestedTreeControl<DirOrFile>((node: DirOrFile) => {
+    if ((node as Directory).sub_directories) {
+      return ((node as Directory).sub_directories as DirOrFile[]).concat((node as Directory).block_files as DirOrFile[]);
+    } else {
+      return [];
+    }
+  });
 
-  hasChild = (_: number, node: FileNode) => !!node.contents && node.contents.length > 0;
+  hasContents = (_: number, node: DirOrFile) => (node as Directory).sub_directories && (node as Directory).sub_directories.length > 0;
 
   constructor() {
   }
