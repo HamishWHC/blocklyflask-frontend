@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { BlockFilesService } from './block-files.service';
+import { BlockFilesService } from "./block-files.service";
 
-describe('BlockFilesService', () => {
+describe("BlockFilesService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  it("should be created", () => {
     const service: BlockFilesService = TestBed.get(BlockFilesService);
     expect(service).toBeTruthy();
   });

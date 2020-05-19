@@ -27,9 +27,12 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/blockly/blockly_compressed.js",
-              "node_modules/blockly/blocks_compressed.js",
-              "node_modules/blockly/msg/js/en.js"
+              "src/app/blocks/blockly/blockly_compressed.js",
+              "src/app/blocks/blockly/blocks_compressed.js",
+              "src/app/blocks/blockly/python_compressed.js",
+              "src/app/blocks/blockly/en-gb.js",
+              "src/app/blocks/flask/definitions.js",
+              "src/app/blocks/flask/generators.js"
             ]
           },
           "configurations": {
