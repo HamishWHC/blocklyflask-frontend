@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import BlockFile from '../../models/block-file';
 
 declare var Blockly: any;
 
@@ -13,6 +14,9 @@ export class BlocklyEditorComponent implements OnInit {
 
   constructor() {
   }
+
+  @Input() openFile: BlockFile;
+  @Input() onSave: CallableFunction;
 
   ngOnInit() {
     const blocklyArea = document.getElementById('blocklyArea');

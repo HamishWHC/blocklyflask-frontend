@@ -38,9 +38,11 @@ Blockly.Blocks['blueprint'] = {
       "message0": "name %1 %2 url prefix %3",
       "args0": [
         {
-          "type": "field_input",
+          "type": "field_variable",
           "name": "name",
-          "text": "api_v1"
+          "variable": "default",
+          "variableTypes": ["Blueprint"],
+          "defaultType": "Blueprint"
         },
         {
           "type": "input_dummy"
@@ -48,7 +50,7 @@ Blockly.Blocks['blueprint'] = {
         {
           "type": "field_input",
           "name": "url_prefix",
-          "text": "/api/v1/"
+          "text": "/"
         }
       ],
       "previousStatement": [
@@ -250,8 +252,9 @@ Blockly.Blocks['blueprint_ref'] = {
         {
           "type": "field_variable",
           "name": "blueprint",
-          "variable": "blueprint",
-          "variableTypes": ["Blueprint"]
+          "variable": "default",
+          "variableTypes": ["Blueprint"],
+          "defaultType": "Blueprint"
         }
       ],
       "output": "Blueprint",

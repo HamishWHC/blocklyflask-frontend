@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
 import {DeleteResponse} from '../models/simple-responses';
 import BlockFile, {BlockFileResponse} from '../models/block-file';
 import {HttpClient} from '@angular/common/http';
-import Project from "../models/project";
+import Project from '../models/project';
 
 @Injectable({
   providedIn: 'root'

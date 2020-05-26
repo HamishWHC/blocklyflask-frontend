@@ -322,8 +322,8 @@
     <block type="flask_application">
       <statement name="blueprints">
         <block type="blueprint">
-          <field name="name">default</field>
           <field name="url_prefix">/</field>
+          <field name="name" variabletype="Blueprint">default</field>
         </block>
       </statement>
     </block>
@@ -333,18 +333,24 @@
   </category>
   <category name="Blueprints" colour="#5b67a5">
     <block type="blueprint">
-      <field name="name">new_bp</field>
       <field name="url_prefix">/new/</field>
+      <field name="name" variabletype="Blueprint">new_bp</field>
     </block>
     <block type="blueprint_ref">
-      <field name="blueprint" id="H8e4Et)$YYh`#Z2d643H">blueprint</field>
+      <field name="blueprint" variabletype="Blueprint">default</field>
+    </block>
+    <block type="blueprint_ref">
+      <field name="blueprint" variabletype="Blueprint">new_bp</field>
     </block>
   </category>
   <category name="Endpoint Creation" colour="#5ba55b">
     <block type="bp_route">
       <value name="blueprint">
         <block type="blueprint_ref">
-          <field name="blueprint" id="H8e4Et)$YYh`#Z2d643H">blueprint</field>
+          <field name="blueprint" variabletype="Blueprint">default</field>
+        </block>
+        <block type="blueprint_ref">
+          <field name="blueprint">new_bp</field>
         </block>
       </value>
       <statement name="url_rules">

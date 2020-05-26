@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import Project from '../../models/project';
 import {ProjectsService} from '../../services/projects.service';
 import User from '../../models/user';
+import BlockFile from '../../models/block-file';
+import {BlockFilesService} from '../../services/block-files.service';
 
 @Component({
   selector: 'app-ide',
@@ -20,22 +22,34 @@ export class IDEComponent implements OnInit {
   projectName: string;
 
   project: Project;
+  openFile: BlockFile;
   loading = true;
 
   constructor(
     private route: ActivatedRoute,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private blockFileService: BlockFilesService
   ) {
+  }
+
+  onSave() {
+    // TODO: PUT data to server. Some modification (remove dump only values) needed.
+    this.blockFileService.modify(this.openFile);
+    this.refresh();
+  }
+
+  refresh() {
+    this.loading = true;
+    this.projectsService.get(this.projectName).subscribe(response => {
+      this.project = response.data;
+      this.loading = false;
+    });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.projectName = params.projectName;
-      this.projectsService.get(this.projectName).subscribe(response => {
-        this.project = response.data;
-        console.log(this.project);
-        this.loading = false;
-      });
+      this.refresh();
     });
   }
 }

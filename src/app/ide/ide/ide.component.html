@@ -10,14 +10,14 @@
 <div id="container">
   <div class="pane-split">
     <as-split id="splitter" unit="percent" [restrictMove]="restrictMove" gutterSize="10">
-      <as-split-area size="30" minSize="5" maxSize="50">
+      <as-split-area size="20" minSize="5" maxSize="50">
         <div id="file-view" class="pane">
           <app-file-view [project]="project"></app-file-view>
         </div>
       </as-split-area>
-      <as-split-area size="70" minSize="50" maxSize="95">
+      <as-split-area size="80" minSize="50" maxSize="95">
         <div id="blockly-editor" class="pane">
-          <app-blockly-editor></app-blockly-editor>
+          <app-blockly-editor [openFile]="openFile" [onSave]="onSave"></app-blockly-editor>
         </div>
       </as-split-area>
     </as-split>
