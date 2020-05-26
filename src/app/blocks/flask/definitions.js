@@ -6,7 +6,7 @@ Blockly.Blocks['bp_route'] = {
         {
           "type": "input_value",
           "name": "blueprint",
-          "check": "blueprint_ref"
+          "check": "Blueprint"
         },
         {
           "type": "input_statement",
@@ -26,7 +26,8 @@ Blockly.Blocks['bp_route'] = {
       "inputsInline": true,
       "colour": 75,
       "tooltip": "Creates a Blueprint Route",
-      "helpUrl": ""
+      "helpUrl": "",
+      "hat": "cap"
     });
   }
 };
@@ -249,10 +250,11 @@ Blockly.Blocks['blueprint_ref'] = {
         {
           "type": "field_variable",
           "name": "blueprint",
-          "variable": "blueprint"
+          "variable": "blueprint",
+          "variableTypes": ["Blueprint"]
         }
       ],
-      "output": null,
+      "output": "Blueprint",
       "colour": 230,
       "tooltip": "",
       "helpUrl": ""

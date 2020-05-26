@@ -4,11 +4,11 @@ import Directory from './directory';
 export default class Project {
   id: number;
   name: string;
-  user: User;
+  user?: User;
   // tslint:disable-next-line:variable-name
-  last_modified: string;
+  last_modified?: string;
   // tslint:disable-next-line:variable-name
-  root_directory: Directory;
+  root_directory?: Directory;
 }
 
 export class ProjectResponse {

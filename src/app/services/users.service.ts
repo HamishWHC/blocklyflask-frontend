@@ -12,25 +12,25 @@ import {DeleteResponse} from '../models/simple-responses';
 export class UsersService {
   constructor(private http: HttpClient) { }
 
-  getUser(identifier: string | number): Observable<User> {
+  get(identifier: string | number): Observable<User> {
     return this.http.get<UserResponse>(`${API_URL}/user/${identifier}/`).pipe(map(result => {
       return result.data;
     }));
   }
 
-  postUser(user: User): Observable<User> {
+  create(user: User): Observable<User> {
     return this.http.post<UserResponse>(`${API_URL}/users/`, user).pipe(map(result => {
       return result.data;
     }));
   }
 
-  putUser(user: User, identifier?: string | number): Observable<User> {
+  modify(user: User, identifier?: string | number): Observable<User> {
     return this.http.put<UserResponse>(!!identifier ? `${API_URL}/user/${identifier}/` : `${API_URL}/user/`, user).pipe(map(result => {
       return result.data;
     }));
   }
 
-  deleteUser(identifier?: string | number): Observable<boolean> {
+  delete(identifier?: string | number): Observable<boolean> {
     return this.http.delete<DeleteResponse>(!!identifier ? `${API_URL}/user/${identifier}/` : `${API_URL}/user/`).pipe(map(result => {
       return result.msg === 'success';
     }));

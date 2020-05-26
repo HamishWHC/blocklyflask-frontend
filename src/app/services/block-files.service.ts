@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {DeleteResponse} from '../models/simple-responses';
 import BlockFile, {BlockFileResponse} from '../models/block-file';
 import {HttpClient} from '@angular/common/http';
+import Project from "../models/project";
 
 @Injectable({
   providedIn: 'root'
@@ -15,26 +16,26 @@ export class BlockFilesService {
   constructor(private http: HttpClient) {
   }
 
-  getBlockFile(id: number): Observable<BlockFile> {
+  get(id: number): Observable<BlockFile> {
     return this.http.get<BlockFileResponse>(`${API_URL}/block-file/${id}/`).pipe(map(result => {
       return result.data;
     }));
   }
 
-  postUser(user: User): Observable<User> {
-    return this.http.post<UserResponse>(`${API_URL}/users/`, user).pipe(map(result => {
+  create(project: Project, blockFile: BlockFile, path?: string): Observable<BlockFile> {
+    return this.http.post<BlockFileResponse>(`${API_URL}/project/${project.id}/create-file-in/${path ? path : blockFile.full_path}`, blockFile).pipe(map(result => {
       return result.data;
     }));
   }
 
-  putUser(user: User, identifier?: string | number): Observable<User> {
-    return this.http.put<UserResponse>(!!identifier ? `${API_URL}/user/${identifier}/` : `${API_URL}/user/`, user).pipe(map(result => {
+  modify(blockFile: BlockFile): Observable<BlockFile> {
+    return this.http.put<BlockFileResponse>(`${API_URL}/block-file/${blockFile.id}/`, blockFile).pipe(map(result => {
       return result.data;
     }));
   }
 
-  deleteUser(identifier?: string | number): Observable<boolean> {
-    return this.http.delete<DeleteResponse>(!!identifier ? `${API_URL}/user/${identifier}/` : `${API_URL}/user/`).pipe(map(result => {
+  delete(identifier: number): Observable<boolean> {
+    return this.http.delete<DeleteResponse>(`${API_URL}/block-file/${identifier}/`).pipe(map(result => {
       return result.msg === 'success';
     }));
   }

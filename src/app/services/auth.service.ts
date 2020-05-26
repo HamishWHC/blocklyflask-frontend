@@ -45,5 +45,4 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');
   }
-
 }
