@@ -1,1 +1,13 @@
-base works!
+<mat-toolbar id="toolbar">
+  <div id="toolbarLeft">
+    <h2 (click)="router.navigate(['/'])">BlocklyFlask</h2>
+  </div>
+  <div id="toolbarRight">
+    <a [href]="'/user/' + authService.user.username" *ngIf="authService.user">@{{authService.user.username}}</a>
+    <div *ngIf="!authService.user">
+      <button mat-stroked-button class="toolbarBtn" color="primary" routerLink="/login">Login</button>
+      <button mat-stroked-button class="toolbarBtn" color="primary" routerLink="/sign-up">Sign Up</button>
+    </div>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

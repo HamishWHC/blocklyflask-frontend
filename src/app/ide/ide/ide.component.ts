@@ -12,11 +12,6 @@ import {BlockFilesService} from '../../services/block-files.service';
   styleUrls: ['./ide.component.css']
 })
 export class IDEComponent implements OnInit {
-  user: User = {
-    id: 0, projects: [],
-    username: 'HamishWHC'
-  };
-
   restrictMove = false;
 
   projectName: string;

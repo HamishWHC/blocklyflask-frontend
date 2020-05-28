@@ -38,11 +38,9 @@ Blockly.Blocks['blueprint'] = {
       "message0": "name %1 %2 url prefix %3",
       "args0": [
         {
-          "type": "field_variable",
+          "type": "field_input",
           "name": "name",
-          "variable": "default",
-          "variableTypes": ["Blueprint"],
-          "defaultType": "Blueprint"
+          "text": "default"
         },
         {
           "type": "input_dummy"
@@ -62,6 +60,51 @@ Blockly.Blocks['blueprint'] = {
       "tooltip": "Creates a category of endpoints/views (e.g. an API version or the admin section).",
       "helpUrl": ""
     });
+    this.setOnChange(function (event) {
+      console.log(event);
+      if (event.type === Blockly.Events.BLOCK_MOVE) {
+        if (event.blockId === this.id && this.getRootBlock().type !== "flask_application") {
+          this.setWarningText('Must be within a Flask Application block.');
+        }
+      } else if (event.type === Blockly.Events.BLOCK_CHANGE) {
+        if (event.blockId === this.id && event.name === "name") {
+          let existing_var = this.workspace.getVariable(event.newValue);
+          if (existing_var) {
+            this.setWarningText('This variable (blueprints are variables BTW) name is already taken!');
+          } else {
+            try {
+              this.workspace.renameVariableById(this.bp_var_id, event.newValue)
+            } catch (error) {
+              this.bp_var_id = this.workspace.createVariable(this.getFieldValue("name"), "Blueprint").getId();
+            }
+          }
+        }
+      } else if (event.type === Blockly.Events.BLOCK_DELETE) {
+        if (event.ids.includes(this.id)) {
+          this.workspace.deleteVariableById(this.bp_var_id);
+        }
+      } else if (event.type === Blockly.Events.VAR_RENAME) {
+        if (event.varId === this.bp_var_id) {
+          this.setFieldValue(event.newName, "name")
+        }
+      } else {
+        this.setWarningText(null);
+      }
+    });
+  },
+  mutationToDom: () => {
+    var container = document.createElement('mutation');
+    if (this.bp_var_id) {
+      container.setAttribute('bp_var_id', this.bp_var_id);
+    }
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    if (xmlElement.hasAttribute("bp_var_id")) {
+      this.bp_var_id = xmlElement.getAttribute('bp_var_id');
+    } else {
+      this.bp_var_id = null;
+    }
   }
 };
 

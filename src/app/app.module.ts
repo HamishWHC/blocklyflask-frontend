@@ -9,11 +9,22 @@ import {IDEComponent} from './ide/ide/ide.component';
 import {IDEModule} from './ide/ide.module';
 import {UserViewModule} from './user-view/user-view.module';
 import {HttpClientModule} from '@angular/common/http';
+import {LoginComponent} from "./user-view/login/login.component";
+import {SignUpComponent} from "./user-view/sign-up/sign-up.component";
+import {BaseComponent} from "./user-view/base/base.component";
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: '@:username', component: UserComponent},
-  {path: 'edit/:projectName', component: IDEComponent}
+  {path: 'edit/:projectName', component: IDEComponent},
+  {
+    path: '',
+    component: BaseComponent,
+    children: [
+      {path: '', component: HomeComponent},
+      {path: 'user/:username', component: UserComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'sign-up', component: SignUpComponent}
+    ]
+  }
 ];
 
 @NgModule({
@@ -32,4 +43,5 @@ const appRoutes: Routes = [
     [AppComponent]
 })
 
-export class AppModule {}
+export class AppModule {
+}
