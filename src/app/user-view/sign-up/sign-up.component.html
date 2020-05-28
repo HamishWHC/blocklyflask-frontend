@@ -60,7 +60,7 @@
       </p>
 
       <div class="button">
-        <button type="submit" mat-raised-button color="primary">Create Account</button>
+        <button type="submit" mat-raised-button [disabled]="signupForm.valid" color="primary">Create Account</button>
       </div>
 
     </form>

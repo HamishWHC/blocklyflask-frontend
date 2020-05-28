@@ -19,7 +19,7 @@
       </p>
 
       <div class="button">
-        <button type="submit" mat-raised-button color="primary">Login</button>
+        <button type="submit" mat-raised-button [disabled]="loginForm.valid" color="primary">Login</button>
       </div>
 
     </form>
