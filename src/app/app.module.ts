@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from "./user-view/login/login.component";
 import {SignUpComponent} from "./user-view/sign-up/sign-up.component";
 import {BaseComponent} from "./user-view/base/base.component";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   {path: 'edit/:projectName', component: IDEComponent},
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     IDEModule,
     UserViewModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap:

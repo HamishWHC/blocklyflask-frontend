@@ -2,7 +2,7 @@ import BlockFile from './block-file';
 import Project from "./project";
 
 export default class Directory {
-  id: number;
+  id?: number;
   name: string;
   project?: Project;
   parent?: Directory;

@@ -3,7 +3,14 @@
     <h2 (click)="router.navigate(['/'])">BlocklyFlask</h2>
   </div>
   <div id="toolbarRight">
-    <a [href]="'/user/' + authService.user.username" *ngIf="authService.user">@{{authService.user.username}}</a>
+    <div *ngIf="authService.user">
+      <button mat-stroked-button color="primary" [matMenuTriggerFor]="userMenu">@{{authService.user.username}}</button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item [routerLink]="['user', authService.user.username]">Profile</button>
+        <button mat-menu-item>Account Settings</button>
+        <button mat-menu-item >Logout</button>
+      </mat-menu>
+    </div>
     <div *ngIf="!authService.user">
       <button mat-stroked-button class="toolbarBtn" color="primary" routerLink="/login">Login</button>
       <button mat-stroked-button class="toolbarBtn" color="primary" routerLink="/sign-up">Sign Up</button>

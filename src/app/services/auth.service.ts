@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import User, {UserResponse} from '../models/user';
 import {HttpClient} from '@angular/common/http';
 import {API_URL} from '../helpers/config';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 class AuthResponse {
@@ -18,15 +18,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     if (localStorage.getItem('currentUser') && localStorage.getItem('accessToken')) {
-      this.user = JSON.parse(localStorage.getItem('username'));
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
     }
   }
 
   user: User = null;
 
-  login(username, password) {
+  login(email, password) {
     return this.http.post<AuthResponse>(API_URL + '/auth/', {
-      username,
+      email,
       password
     }).pipe(map(result => {
       // login successful if there's a jwt token in the response
