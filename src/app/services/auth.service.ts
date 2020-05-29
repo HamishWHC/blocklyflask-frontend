@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import User, {UserResponse} from '../models/user';
+import User from '../models/user';
 import {HttpClient} from '@angular/common/http';
-import {API_URL} from '../helpers/config';
-import {catchError, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {map} from 'rxjs/operators';
 
 class AuthResponse {
   // tslint:disable-next-line:variable-name
@@ -25,7 +24,7 @@ export class AuthService {
   user: User = null;
 
   login(email, password) {
-    return this.http.post<AuthResponse>(API_URL + '/auth/', {
+    return this.http.post<AuthResponse>(`${environment.API_URL}/auth/`, {
       email,
       password
     }).pipe(map(result => {

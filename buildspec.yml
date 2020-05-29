@@ -6,7 +6,7 @@ phases:
       - npm install
   build:
     commands:
-      - npm run build
+      - npm run build --prod
   post_build:
     commands:
       - aws s3 sync --delete ./dist/blocklyflask-frontend s3://$BUCKET_NAME

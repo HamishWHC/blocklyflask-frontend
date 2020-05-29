@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import Project, {ProjectResponse} from '../models/project';
 import {HttpClient} from '@angular/common/http';
-import {API_URL} from '../helpers/config';
+import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import BlockFile, {BlockFileResponse} from "../models/block-file";
+import {BlockFileResponse} from "../models/block-file";
 import {map} from "rxjs/operators";
 import {DeleteResponse} from "../models/simple-responses";
 
@@ -18,23 +18,23 @@ export class ProjectsService {
   }
 
   get(identifier: string | number): Observable<ProjectResponse> {
-    return this.http.get<ProjectResponse>(API_URL + '/project/' + identifier + '/');
+    return this.http.get<ProjectResponse>(`${environment.API_URL}/project/${identifier}/`);
   }
 
   create(project: Project): Observable<Project> {
-    return this.http.post<ProjectResponse>(`${API_URL}/projects/`, project).pipe(map(result => {
+    return this.http.post<ProjectResponse>(`${environment.API_URL}/projects/`, project).pipe(map(result => {
       return result.data;
     }));
   }
 
   modify(project: Project): Observable<Project> {
-    return this.http.put<BlockFileResponse>(`${API_URL}/project/${project.id}/`, project).pipe(map(result => {
+    return this.http.put<BlockFileResponse>(`${environment.API_URL}/project/${project.id}/`, project).pipe(map(result => {
       return result.data;
     }));
   }
 
   delete(identifier: number | string): Observable<boolean> {
-    return this.http.delete<DeleteResponse>(`${API_URL}/project/${identifier}/`).pipe(map(result => {
+    return this.http.delete<DeleteResponse>(`${environment.API_URL}/project/${identifier}/`).pipe(map(result => {
       return result.msg === 'success';
     }));
   }
