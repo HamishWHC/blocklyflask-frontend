@@ -44,8 +44,6 @@ export class UsernameTakenValidator {
 }
 
 export const confirmPassword: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-  console.log(control.get('password').value);
-  console.log(control.get('confirmPassword').value);
   console.log((
     control.get('password').value === control.get('confirmPassword').value
   ) ? null : {confirmPassword: {value: control.get('confirmPassword').value}});
