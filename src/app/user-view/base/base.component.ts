@@ -12,12 +12,11 @@ import {ProjectNameInputComponent} from '../project-name-input/project-name-inpu
 })
 export class BaseComponent implements OnInit {
   constructor(
-    private authService: AuthService,
-    private router: Router,
+    public authService: AuthService,
+    public router: Router,
     private projectNameTakenValidator: ProjectNameTakenValidator,
     private projectsService: ProjectsService
   ) {
-    this.createProject.bind(this);
   }
 
   ngOnInit() {
@@ -29,5 +28,5 @@ export class BaseComponent implements OnInit {
     }).subscribe(project => {
       this.router.navigate(['edit', project.name]);
     });
-  }
+  };
 }

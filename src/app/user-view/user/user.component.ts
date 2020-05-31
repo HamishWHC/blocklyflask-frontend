@@ -22,9 +22,9 @@ export class UserComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private usersService: UsersService,
-    private authService: AuthService,
+    public authService: AuthService,
     private projectsService: ProjectsService,
-    private router: Router
+    public router: Router
   ) {
     this.createProject.bind(this);
   }

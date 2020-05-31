@@ -8,7 +8,7 @@ import {ProjectNameTakenValidator} from '../../helpers/project-uniquity-validato
   styleUrls: ['./project-name-input.css']
 })
 export class ProjectNameInputComponent implements OnInit {
-  private input: FormControl;
+  input: FormControl;
 
   @Input() click: (projectName: string) => void;
   @Input() showRequired = true;
@@ -30,10 +30,10 @@ export class ProjectNameInputComponent implements OnInit {
       this.projectNameTakenValidator.validateFn(this.projectId)
     ]);
   }
-  public getValue() {
+  getValue() {
     return this.input.value;
   }
-  private onClick() {
+  onClick() {
     if (this.input.valid) {
       this.click(this.input.value);
     }

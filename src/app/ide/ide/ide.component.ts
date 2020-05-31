@@ -27,7 +27,7 @@ export class IDEComponent implements OnInit {
     private route: ActivatedRoute,
     private projectsService: ProjectsService,
     private blockFileService: BlockFilesService,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     private location: Location
   ) {
