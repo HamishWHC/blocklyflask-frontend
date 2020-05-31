@@ -7,7 +7,7 @@
       <app-project-name-input class="toolbarText" [click]="createProject" [showRequired]="false"></app-project-name-input>
       <button mat-stroked-button color="primary" class="toolbarBtn" [matMenuTriggerFor]="userMenu">@{{authService.user.username}}</button>
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item [routerLink]="['user', authService.user.username]">Profile</button>
+        <button mat-menu-item [routerLink]="['/user', authService.user.username]">Profile</button>
         <button mat-menu-item>Account Settings</button>
         <button mat-menu-item (click)="authService.logout()">Logout</button>
       </mat-menu>
