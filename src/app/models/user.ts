@@ -6,6 +6,8 @@ export default class User {
   password?: string;
   email?: string;
   projects?: Project[];
+  // tslint:disable-next-line:variable-name
+  gravatar_link?: string;
 }
 
 export class UserResponse {

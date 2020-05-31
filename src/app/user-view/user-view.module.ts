@@ -9,14 +9,24 @@ import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
-import {MatCardModule, MatFormFieldModule, MatInputModule, MatMenuModule} from '@angular/material';
+import {
+  MatCardModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatMenuModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
+import {AppModule} from '../app.module';
+import {ProjectNameInputComponent} from './project-name-input/project-name-input.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, UserComponent, BaseComponent, LoginComponent, SignUpComponent],
+  declarations: [HomeComponent, UserComponent, BaseComponent, LoginComponent, SignUpComponent, ProjectNameInputComponent],
   exports: [
-    BaseComponent
+    BaseComponent,
+    ProjectNameInputComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +38,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatMenuModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    MatDividerModule,
+    MatProgressSpinnerModule
   ]
 })
 export class UserViewModule {

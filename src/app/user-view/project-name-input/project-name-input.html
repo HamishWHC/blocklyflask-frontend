@@ -1,0 +1,16 @@
+<mat-form-field class="item">
+  <input type="text" matInput [placeholder]="placeholderText || 'New Project Name'" [formControl]="input">
+  <mat-error *ngIf="showRequired && input.hasError('required')">
+    Project name is required
+  </mat-error>
+  <mat-error *ngIf="input.hasError('pattern')">
+    Project name can only use a-z, 0-9, - and _
+  </mat-error>
+  <mat-error *ngIf="input.hasError('maxlength') || input.hasError('minlength')">
+    Project name must be 6-60 characters
+  </mat-error>
+  <mat-error *ngIf="input.hasError('takenProjectName')">
+    That name is taken
+  </mat-error>
+</mat-form-field>
+<button mat-raised-button class="item" (click)="onClick()" [disabled]="!input.valid" color="primary">{{ buttonText || "Create" }}</button>

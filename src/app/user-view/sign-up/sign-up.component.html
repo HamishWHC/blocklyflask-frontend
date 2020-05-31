@@ -9,7 +9,10 @@
             Username is <strong>required</strong>
           </mat-error>
           <mat-error *ngIf="signupForm.controls.username.hasError('pattern')">
-            Invalid Username
+            Username can only use a-z, 0-9, - or _
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls.username.hasError('maxlength') || signupForm.controls.username.hasError('minlength')">
+            Username must be 6-20 characters
           </mat-error>
           <mat-error *ngIf="signupForm.controls.username.hasError('takenUsername')">
             That username is taken
@@ -23,7 +26,7 @@
             Email is <strong>required</strong>
           </mat-error>
           <mat-error *ngIf="signupForm.controls.email.hasError('pattern')">
-            Invalid Email
+            Invalid Email Address
           </mat-error>
           <mat-error *ngIf="signupForm.controls.email.hasError('takenEmail')">
             That email already has an account

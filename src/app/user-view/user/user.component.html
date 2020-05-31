@@ -1,1 +1,24 @@
-<p>user works!</p>
+<div class="loading" *ngIf="!user">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="container" *ngIf="user">
+  <div class="profile-controls">
+    <img *ngIf="user" [src]="user.gravatar_link">
+  </div>
+  <mat-divider vertical class="divider"></mat-divider>
+  <div class="project-list">
+    <mat-card *ngIf="!loading && !user.projects.length && authService.user && user.id === authService.user.id">
+      <mat-card-title>You don't have any projects!</mat-card-title>
+      <mat-card-content class="no-projects-create-project-container">
+        <app-project-name-input [showRequired]="true" [click]="createProject"></app-project-name-input>
+      </mat-card-content>
+    </mat-card>
+    <div *ngIf="!loading && !user.projects.length && (!authService.user || user.id !== authService.user.id)" class="no-projects-other-user">
+      This user doesn't have any projects!
+    </div>
+    <mat-card *ngFor="let p of user ? user.projects : [];" (click)="router.navigate(['edit', p.name])">
+      <mat-card-title>{{ p.name }}</mat-card-title>
+      <mat-card-subtitle>Updated {{ getUpdated(p.last_modified) }}</mat-card-subtitle>
+    </mat-card>
+  </div>
+</div>

@@ -16,26 +16,24 @@ export class BlockFilesService {
   }
 
   get(id: number): Observable<BlockFile> {
-    return this.http.get<BlockFileResponse>(`${environment.API_URL}/block-file/${id}/`).pipe(map(result => {
-      return result.data;
-    }));
+    return this.http.get<BlockFileResponse>(`${environment.API_URL}/block-file/${id}/`).pipe(map(result => result.data));
   }
 
   create(project: Project, blockFile: BlockFile, path?: string): Observable<BlockFile> {
-    return this.http.post<BlockFileResponse>(`${environment.API_URL}/project/${project.id}/create-file-in/${path ? path : blockFile.full_path}`, blockFile).pipe(map(result => {
-      return result.data;
-    }));
+    return this.http.post<BlockFileResponse>(
+      `${environment.API_URL}/project/${project.id}/create-file-in/${path ? path : blockFile.full_path}`, blockFile
+    ).pipe(map(result => result.data));
   }
 
-  modify(blockFile: BlockFile): Observable<BlockFile> {
-    return this.http.put<BlockFileResponse>(`${environment.API_URL}/block-file/${blockFile.id}/`, blockFile).pipe(map(result => {
-      return result.data;
-    }));
+  modify(blockFile: BlockFile, blockFileId: number): Observable<BlockFile> {
+    return this.http.put<BlockFileResponse>(
+      `${environment.API_URL}/block-file/${blockFileId}/`, blockFile
+    ).pipe(map(result => result.data));
   }
 
   delete(identifier: number): Observable<boolean> {
-    return this.http.delete<DeleteResponse>(`${environment.API_URL}/block-file/${identifier}/`).pipe(map(result => {
-      return result.msg === 'success';
-    }));
+    return this.http.delete<DeleteResponse>(
+      `${environment.API_URL}/block-file/${identifier}/`
+    ).pipe(map(result => result.msg === 'success'));
   }
 }

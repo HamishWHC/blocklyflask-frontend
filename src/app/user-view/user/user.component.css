@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.profile-controls {
+  align-self: flex-start;
+}
+
+.divider {
+  margin: 20px
+}
+
+.project-list {
+  /* As Container Item */
+
+  /* As Container for Project Cards */
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+}
+
+.no-projects-create-project-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  align-items: center;
+}
+
+.no-projects-create-project-item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.no-projects-other-user {
+  padding-top: 20px;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+.loading {
+  padding-top: 50px;
+}

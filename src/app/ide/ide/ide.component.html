@@ -1,10 +1,25 @@
 <mat-toolbar id="toolbar">
-  <div id="toolbarLeft">
-    <a href="#">@{{project.user.username}}</a> / <a href="#">{{ projectName }}</a>
-    <span id="name-button-sep"></span>
-    <button mat-stroked-button color="primary" disabled>Save</button>
-    <button mat-stroked-button>Fork</button>
-    <button mat-stroked-button color="accent">Sharing</button>
+  <div id="toolbarLeft" *ngIf="!renaming">
+    <p>{{ projectName }}</p>
+    <mat-icon *ngIf="project && authService.user.id === project.user.id" class="renameIcon" (click)="this.renaming = true;">edit</mat-icon>
+  </div>
+  <app-project-name-input *ngIf="renaming" class="toolbarText" [click]="renameProject"
+                          [showRequired]="true" [defaultValue]="project.name" [projectId]="project.id"
+                          buttonText="Rename"></app-project-name-input>
+  <div id="toolbarRight">
+    <div *ngIf="authService.user">
+      <button mat-stroked-button color="primary" class="toolbarBtn" [matMenuTriggerFor]="userMenu">
+        @{{authService.user.username}}</button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/user', authService.user.username]">Profile</button>
+        <button mat-menu-item>Account Settings</button>
+        <button mat-menu-item (click)="authService.logout()">Logout</button>
+      </mat-menu>
+    </div>
+    <div *ngIf="!authService.user">
+      <button mat-stroked-button class="toolbarBtn" color="primary" routerLink="/login">Login</button>
+      <button mat-stroked-button class="toolbarBtn" color="primary" routerLink="/sign-up">Sign Up</button>
+    </div>
   </div>
 </mat-toolbar>
 <div id="container">

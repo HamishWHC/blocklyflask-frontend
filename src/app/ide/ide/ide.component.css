@@ -3,7 +3,19 @@ p {
 }
 
 #toolbarLeft {
-  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.renameIcon {
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.toolbarBtn {
+  margin: 10px;
 }
 
 #name-button-sep {
@@ -31,4 +43,12 @@ as-split-area {
 
 #splitter {
   height: calc(100vh - 64px);
+}
+
+#toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+.toolbarText {
+  font-size: 14px;
 }

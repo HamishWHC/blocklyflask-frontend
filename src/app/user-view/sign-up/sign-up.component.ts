@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
           null,
           [
             Validators.required,
-            Validators.pattern(/^[a-zA-Z_\-0-9]{6,20}$/),
+            Validators.pattern(/^[a-zA-Z_\-0-9]*$/),
             Validators.minLength(6),
             Validators.maxLength(20)
           ],
@@ -64,6 +64,7 @@ export class SignUpComponent implements OnInit {
         password: this.signupForm.controls.password.value
       }).pipe(first()).subscribe(
         createUserResponse => {
+          this.authService.setCurrentUser(createUserResponse.access_token, createUserResponse.data);
           this.router.navigate(['user', createUserResponse.data.username]);
         },
         () => {

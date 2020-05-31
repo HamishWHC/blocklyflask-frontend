@@ -20,21 +20,19 @@ export class UsersService {
   }
 
   create(user: User): Observable<UserCreateResponse> {
-    return this.http.post<UserCreateResponse>(`${environment.API_URL}/users/`, user).pipe(map(result => {
-      return result;
-    }));
+    return this.http.post<UserCreateResponse>(`${environment.API_URL}/users/`, user);
   }
 
-  modify(user: User, identifier?: string | number): Observable<User> {
-    return this.http.put<UserResponse>(!!identifier ? `${environment.API_URL}/user/${identifier}/` : `${environment.API_URL}/user/`, user).pipe(map(result => {
-      return result.data;
-    }));
+  modify(user: User): Observable<User> {
+    return this.http.put<UserResponse>(
+      `${environment.API_URL}/user/`, user
+    ).pipe(map(result => result.data));
   }
 
   delete(identifier?: string | number): Observable<boolean> {
-    return this.http.delete<DeleteResponse>(!!identifier ? `${environment.API_URL}/user/${identifier}/` : `${environment.API_URL}/user/`).pipe(map(result => {
-      return result.msg === 'success';
-    }));
+    return this.http.delete<DeleteResponse>(
+      !!identifier ? `${environment.API_URL}/user/${identifier}/` : `${environment.API_URL}/user/`
+    ).pipe(map(result => result.msg === 'success'));
   }
 
   verifyEmailTaken(email: string, userId?: number): Observable<boolean> {

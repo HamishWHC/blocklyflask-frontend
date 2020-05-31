@@ -3,12 +3,30 @@
   justify-content: space-between;
 }
 
-#toolbarLeft {
-}
-
-#toolbarRight {
-}
-
 .toolbarBtn {
   margin: 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.footer-text {
+  font-size: small;
+}
+
+.router-wrapper {
+  flex: 1 0 auto;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.toolbarText {
+  font-size: 14px;
 }

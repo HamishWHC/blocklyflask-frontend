@@ -4,11 +4,12 @@
   </div>
   <div id="toolbarRight">
     <div *ngIf="authService.user">
-      <button mat-stroked-button color="primary" [matMenuTriggerFor]="userMenu">@{{authService.user.username}}</button>
+      <app-project-name-input class="toolbarText" [click]="createProject" [showRequired]="false"></app-project-name-input>
+      <button mat-stroked-button color="primary" class="toolbarBtn" [matMenuTriggerFor]="userMenu">@{{authService.user.username}}</button>
       <mat-menu #userMenu="matMenu">
         <button mat-menu-item [routerLink]="['user', authService.user.username]">Profile</button>
         <button mat-menu-item>Account Settings</button>
-        <button mat-menu-item >Logout</button>
+        <button mat-menu-item (click)="authService.logout()">Logout</button>
       </mat-menu>
     </div>
     <div *ngIf="!authService.user">
@@ -17,4 +18,10 @@
     </div>
   </div>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<div class="router-wrapper">
+  <router-outlet></router-outlet>
+</div>
+<mat-toolbar class="footer">
+  <p class="footer-text">&copy; Hamish Cox, 2020 - <a href="https://github.com/HamishWHC/blocklyflask-frontend">Source Code
+    on GitHub</a></p>
+</mat-toolbar>
