@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import BlockFile from '../../models/block-file';
-import {getBlueprintsCategory} from "../../blocks/flask/callbacks";
+import {getBlueprintsCategory} from '../../blocks/flask/callbacks';
 
 declare var Blockly: any;
 
@@ -22,36 +22,25 @@ export class BlocklyEditorComponent implements OnInit {
   workspace: any;
 
   ngOnInit() {
-    this.blocklyInit()
+    this.blocklyInit();
   }
 
   blocklyInit() {
     this.blocklyArea = document.getElementById('blocklyArea');
     this.blocklyDiv = document.getElementById('blocklyDiv');
-    this.workspace = Blockly.inject(this.blocklyDiv, {
+    this.workspace = Blockly.inject('blocklyDiv', {
       toolbox: document.getElementById('toolbox')
     });
     // this.workspace.registerToolboxCategoryCallback("BLUEPRINT_CATEGORY", getBlueprintsCategory)
-    window.addEventListener('resize', this.blocklyOnResize, false);
-    this.blocklyOnResize();
+    // window.addEventListener('resize', this.blocklyOnResize, false);
+    // this.blocklyOnResize();
+    Blockly.svgResize(this.workspace);
+
   }
 
-  blocklyOnResize(e?) {
-    // Compute the absolute coordinates and dimensions of blocklyArea.
-    let element: Element = this.blocklyArea;
-    let x = 0;
-    let y = 0;
-    do {
-      x += element.clientLeft;
-      y += element.clientTop;
-      element = element.parentElement;
-    } while (element);
-    // Position blocklyDiv over blocklyArea.
-    this.blocklyDiv.style.left = x + 'px';
-    this.blocklyDiv.style.top = y + 'px';
-    this.blocklyDiv.style.width = this.blocklyArea.offsetWidth + 'px';
-    this.blocklyDiv.style.height = this.blocklyArea.offsetHeight + 'px';
+  @HostListener('window:resize')
+  onResize = () => {
     Blockly.svgResize(this.workspace);
-  };
+  }
 
 }
