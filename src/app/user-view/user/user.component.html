@@ -20,7 +20,7 @@
     <mat-card *ngFor="let p of user ? user.projects : [];" class="project-card">
       <mat-card-title class="title-container">
         <span (click)="router.navigate(['edit', p.name])">{{ p.name }}</span>
-        <button mat-icon-button title="Project Menu" [matMenuTriggerFor]="projectMenu">
+        <button mat-icon-button *ngIf="authService.user && user.id === authService.user.id" title="Project Menu" [matMenuTriggerFor]="projectMenu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #projectMenu="matMenu">
