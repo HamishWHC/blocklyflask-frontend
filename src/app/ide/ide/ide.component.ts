@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import Project from '../../models/project';
 import {ProjectsService} from '../../services/projects.service';
@@ -6,6 +6,8 @@ import BlockFile from '../../models/block-file';
 import {BlockFilesService} from '../../services/block-files.service';
 import {AuthService} from '../../services/auth.service';
 import {Location} from '@angular/common';
+import {BlocklyEditorComponent} from '../blockly-editor/blockly-editor.component';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-ide',
@@ -20,6 +22,12 @@ export class IDEComponent implements OnInit {
   project: Project;
   openFile: BlockFile;
   loading = true;
+  editor: BlocklyEditorComponent;
+
+  @ViewChild(BlocklyEditorComponent, {static: false})
+  set blocklyEditor(component: BlocklyEditorComponent) {
+    this.editor = component;
+  };
 
   renaming = false;
 
@@ -33,17 +41,22 @@ export class IDEComponent implements OnInit {
   ) {
   }
 
-  onSave() {
-    // TODO: PUT data to server. Some modification (remove dump only values) needed.
-    this.blockFileService.modify(this.openFile, this.openFile.id);
-    this.refresh();
-  }
-
-  refresh() {
+  refresh = () => {
     this.loading = true;
     this.projectsService.get(this.projectName).subscribe(project => {
       this.project = project;
-      this.loading = false;
+      if (this.project.root_directory.block_files.length > 0) {
+        this.openFile = this.project.root_directory.block_files[0];
+        this.editor.openFile(this.openFile);
+        this.loading = false;
+      } else {
+        this.blockFileService.create(project.id, {
+          block_xml: '',
+          name: 'app.py'
+        }, '').subscribe(newFile => {
+          this.refresh();
+        });
+      }
     });
   }
 
@@ -61,5 +74,9 @@ export class IDEComponent implements OnInit {
       this.project = project;
       this.projectName = project.name;
     });
+  }
+
+  downloadDemo = () => {
+    window.location.href=`${environment.API_URL}/static/hello-world-demo.py`;
   }
 }

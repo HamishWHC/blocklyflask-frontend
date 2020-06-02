@@ -18,6 +18,16 @@ export class ErrorInterceptor implements HttpInterceptor {
         // auto logout if 401 response returned from api
         this.authService.logout();
         this.router.navigate(['/login'], {queryParams: {returnUrl: this.router.url}});
+        return;
+      } else if (err.status === 500) {
+        alert('An error occurred!');
+        return;
+      } else if (err.status === 403) {
+        return;
+      } else if (err.status === 405) {
+        return;
+      } else if (err.status === 308) {
+        return;
       }
       return throwError(err);
     }));

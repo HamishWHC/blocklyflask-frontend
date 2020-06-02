@@ -30,4 +30,8 @@ export class FileViewComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  getRoot() {
+    return ((this.project.root_directory as Directory).sub_directories as DirOrFile[]).concat((this.project.root_directory as Directory).block_files as DirOrFile[]);
+  }
 }

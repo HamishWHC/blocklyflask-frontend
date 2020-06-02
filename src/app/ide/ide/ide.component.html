@@ -1,7 +1,10 @@
 <mat-toolbar id="toolbar">
   <div id="toolbarLeft" *ngIf="!renaming">
-    <p>{{ projectName }}</p>
-    <mat-icon *ngIf="project && authService.user.id === project.user.id" class="renameIcon" (click)="this.renaming = true;">edit</mat-icon>
+    <p class="projectName">{{ projectName }}</p>
+    <mat-icon *ngIf="project && authService.user && authService.user.id === project.user.id" class="renameIcon" (click)="this.renaming = true;">edit</mat-icon>
+    <button *ngIf="project && authService.user && authService.user.id === project.user.id" mat-stroked-button class="toolbarBtn" color="primary" (click)="editor.save()">Save</button>
+    <button *ngIf="project && authService.user && authService.user.id === project.user.id" mat-stroked-button class="toolbarBtn" color="primary" disabled>Fork</button>
+    <button *ngIf="project && project.name === 'hello-world-demo'" mat-stroked-button class="toolbarBtn" color="primary" (click)="downloadDemo()">Export</button>
   </div>
   <app-project-name-input *ngIf="renaming" class="toolbarText" [click]="renameProject"
                           [showRequired]="true" [defaultValue]="project.name" [projectId]="project.id"
@@ -25,14 +28,14 @@
 <div id="container">
   <div class="pane-split">
     <as-split #splitter id="splitter" unit="percent" (dragEnd)="editor.onResize()" [restrictMove]="restrictMove" gutterSize="10">
-      <as-split-area size="20" minSize="5" maxSize="50">
+      <as-split-area size="5" minSize="5" maxSize="50">
         <div id="file-view" class="pane">
           <app-file-view [project]="project"></app-file-view>
         </div>
       </as-split-area>
-      <as-split-area size="80" minSize="50" maxSize="95">
+      <as-split-area size="95" minSize="50" maxSize="95">
         <div id="blockly-editor" class="pane">
-          <app-blockly-editor #editor [openFile]="openFile" [onSave]="onSave"></app-blockly-editor>
+          <app-blockly-editor #editor [isUserOwner]="project && authService.user && authService.user.id === project.user.id" [refreshIde]="refresh"></app-blockly-editor>
         </div>
       </as-split-area>
     </as-split>

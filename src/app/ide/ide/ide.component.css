@@ -9,6 +9,10 @@ p {
   align-items: center;
 }
 
+.projectName {
+  align-self: center;
+}
+
 .renameIcon {
   font-size: 14px;
   margin-left: 5px;

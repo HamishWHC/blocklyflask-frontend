@@ -19,9 +19,9 @@ export class BlockFilesService {
     return this.http.get<BlockFileResponse>(`${environment.API_URL}/block-file/${id}/`).pipe(map(result => result.data));
   }
 
-  create(project: Project, blockFile: BlockFile, path?: string): Observable<BlockFile> {
+  create(projectId: number, blockFile: BlockFile, path?: string): Observable<BlockFile> {
     return this.http.post<BlockFileResponse>(
-      `${environment.API_URL}/project/${project.id}/create-file-in/${path ? path : blockFile.full_path}`, blockFile
+      `${environment.API_URL}/project/${projectId}/create-file-in/${(path || path === '') ? path : blockFile.full_path}`, blockFile
     ).pipe(map(result => result.data));
   }
 
