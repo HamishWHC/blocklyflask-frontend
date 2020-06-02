@@ -33,6 +33,13 @@ export class UserComponent implements OnInit {
     this.loading = true;
     this.usersService.get(this.username).subscribe(user => {
       this.user = user;
+      if (this.user.projects) {
+        this.user.projects.sort((a, b) => {
+          const aDate = new Date(a.last_modified);
+          const bDate = new Date(b.last_modified);
+          return aDate > bDate ? -1 : aDate < bDate ? 1 : 0;
+        });
+      }
       this.loading = false;
     }, error => {
       this.router.navigate(['/']);
@@ -47,14 +54,20 @@ export class UserComponent implements OnInit {
   }
 
   createProject = (projectName: string) => {
-      this.projectsService.create({
-        name: projectName
-      }).subscribe(project => {
-        this.router.navigate(['edit', project.name]);
-      });
-  }
+    this.projectsService.create({
+      name: projectName
+    }).subscribe(project => {
+      this.router.navigate(['edit', project.name]);
+    });
+  };
 
   getUpdated(dateString: string): string {
     return moment.utc(dateString).fromNow();
+  }
+
+  delete(projectId: number) {
+    this.projectsService.delete(projectId).subscribe(() => {
+      this.refresh();
+    });
   }
 }

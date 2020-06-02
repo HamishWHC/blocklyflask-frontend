@@ -44,3 +44,14 @@
 .loading {
   padding-top: 50px;
 }
+
+.project-card {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
